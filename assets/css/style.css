@@ -1,0 +1,10 @@
+#board {
+    position: relative;
+    width: 100%;
+    min-width: 550px;
+}
+
+#board-user, #board-computer {
+    width: 40%;
+    display:inline-block;
+}

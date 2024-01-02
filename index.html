@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <title>Battleship</title>
+    </head>
+
+    <body>
+        <div id="board">
+            <div id="board-user">
+                <div id="message"></div>
+                <table>
+                    <tr>
+                        <th class="numb"></th>
+                        <th class="numb">1</th>
+                        <th class="numb">2</th>
+                        <th class="numb">3</th>
+                        <th class="numb">4</th>
+                        <th class="numb">5</th>
+                        <th class="numb">6</th>
+                        <th class="numb">7</th>
+                        <th class="numb">8</th>
+                        <th class="numb">9</th>
+                        <th class="numb">10</th>
+                    </tr>
+                    <tr>
+                        <th class="lett">A</th>
+                        <td><div id="00"></div></td>
+                        <td><div id="01"></div></td>
+                        <td><div id="02"></div></td>
+                        <td><div id="03"></div></td>
+                        <td><div id="04"></div></td>
+                        <td><div id="05"></div></td>
+                        <td><div id="06"></div></td>
+                        <td><div id="07"></div></td>
+                        <td><div id="08"></div></td>
+                        <td><div id="09"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">B</th>
+                        <td><div id="10"></div></td>
+                        <td><div id="11"></div></td>
+                        <td><div id="12"></div></td>
+                        <td><div id="13"></div></td>
+                        <td><div id="14"></div></td>
+                        <td><div id="15"></div></td>
+                        <td><div id="16"></div></td>
+                        <td><div id="17"></div></td>
+                        <td><div id="18"></div></td>
+                        <td><div id="19"></div></td>
+                    <tr>
+                        <th class="lett">C</th>
+                        <td><div id="20"></div></td>
+                        <td><div id="21"></div></td>
+                        <td><div id="22"></div></td>
+                        <td><div id="23"></div></td>
+                        <td><div id="24"></div></td>
+                        <td><div id="25"></div></td>
+                        <td><div id="26"></div></td>
+                        <td><div id="27"></div></td>
+                        <td><div id="28"></div></td>
+                        <td><div id="29"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">D</th>
+                        <td><div id="30"></div></td>
+                        <td><div id="31"></div></td>
+                        <td><div id="32"></div></td>
+                        <td><div id="33"></div></td>
+                        <td><div id="34"></div></td>
+                        <td><div id="35"></div></td>
+                        <td><div id="36"></div></td>
+                        <td><div id="37"></div></td>
+                        <td><div id="38"></div></td>
+                        <td><div id="39"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">E</td>
+                        <td><div id="40"></div></td>
+                        <td><div id="41"></div></td>
+                        <td><div id="42"></div></td>
+                        <td><div id="43"></div></td>
+                        <td><div id="44"></div></td>
+                        <td><div id="45"></div></td>
+                        <td><div id="46"></div></td>
+                        <td><div id="47"></div></td>
+                        <td><div id="48"></div></td>
+                        <td><div id="49"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">F</td>
+                        <td><div id="50"></div></td>
+                        <td><div id="51"></div></td>
+                        <td><div id="52"></div></td>
+                        <td><div id="53"></div></td>
+                        <td><div id="54"></div></td>
+                        <td><div id="55"></div></td>
+                        <td><div id="56"></div></td>
+                        <td><div id="57"></div></td>
+                        <td><div id="58"></div></td>
+                        <td><div id="59"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">G</td>
+                        <td><div id="60"></div></td>
+                        <td><div id="61"></div></td>
+                        <td><div id="62"></div></td>
+                        <td><div id="63"></div></td>
+                        <td><div id="64"></div></td>
+                        <td><div id="65"></div></td>
+                        <td><div id="66"></div></td>
+                        <td><div id="67"></div></td>
+                        <td><div id="68"></div></td>
+                        <td><div id="69"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">H</td>
+                        <td><div id="70"></div></td>
+                        <td><div id="71"></div></td>
+                        <td><div id="72"></div></td>
+                        <td><div id="73"></div></td>
+                        <td><div id="74"></div></td>
+                        <td><div id="75"></div></td>
+                        <td><div id="76"></div></td>
+                        <td><div id="77"></div></td>
+                        <td><div id="78"></div></td>
+                        <td><div id="79"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">I</td>
+                        <td><div id="80"></div></td>
+                        <td><div id="81"></div></td>
+                        <td><div id="82"></div></td>
+                        <td><div id="83"></div></td>
+                        <td><div id="84"></div></td>
+                        <td><div id="85"></div></td>
+                        <td><div id="86"></div></td>
+                        <td><div id="87"></div></td>
+                        <td><div id="88"></div></td>
+                        <td><div id="89"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">J</td>
+                        <td><div id="90"></div></td>
+                        <td><div id="91"></div></td>
+                        <td><div id="92"></div></td>
+                        <td><div id="93"></div></td>
+                        <td><div id="94"></div></td>
+                        <td><div id="95"></div></td>
+                        <td><div id="96"></div></td>
+                        <td><div id="97"></div></td>
+                        <td><div id="98"></div></td>
+                        <td><div id="99"></div></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="board-computer">
+                <div id="message"></div>
+                <table>
+                    <tr>
+                        <th class="numb"></th>
+                        <th class="numb">1</th>
+                        <th class="numb">2</th>
+                        <th class="numb">3</th>
+                        <th class="numb">4</th>
+                        <th class="numb">5</th>
+                        <th class="numb">6</th>
+                        <th class="numb">7</th>
+                        <th class="numb">8</th>
+                        <th class="numb">9</th>
+                        <th class="numb">10</th>
+                    </tr>
+                    <tr>
+                        <th class="lett">A</th>
+                        <td><div id="00C"></div></td>
+                        <td><div id="01C"></div></td>
+                        <td><div id="02C"></div></td>
+                        <td><div id="03C"></div></td>
+                        <td><div id="04C"></div></td>
+                        <td><div id="05C"></div></td>
+                        <td><div id="06C"></div></td>
+                        <td><div id="07C"></div></td>
+                        <td><div id="08C"></div></td>
+                        <td><div id="09C"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">B</th>
+                        <td><div id="10C"></div></td>
+                        <td><div id="11C"></div></td>
+                        <td><div id="12C"></div></td>
+                        <td><div id="13C"></div></td>
+                        <td><div id="14C"></div></td>
+                        <td><div id="15C"></div></td>
+                        <td><div id="16C"></div></td>
+                        <td><div id="17C"></div></td>
+                        <td><div id="18C"></div></td>
+                        <td><div id="19C"></div></td>
+                    <tr>
+                        <th class="lett">C</th>
+                        <td><div id="20C"></div></td>
+                        <td><div id="21C"></div></td>
+                        <td><div id="22C"></div></td>
+                        <td><div id="23C"></div></td>
+                        <td><div id="24C"></div></td>
+                        <td><div id="25C"></div></td>
+                        <td><div id="26C"></div></td>
+                        <td><div id="27C"></div></td>
+                        <td><div id="28C"></div></td>
+                        <td><div id="29C"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">D</th>
+                        <td><div id="30C"></div></td>
+                        <td><div id="31C"></div></td>
+                        <td><div id="32C"></div></td>
+                        <td><div id="33C"></div></td>
+                        <td><div id="34C"></div></td>
+                        <td><div id="35C"></div></td>
+                        <td><div id="36C"></div></td>
+                        <td><div id="37C"></div></td>
+                        <td><div id="38C"></div></td>
+                        <td><div id="39C"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">E</td>
+                        <td><div id="40C"></div></td>
+                        <td><div id="41C"></div></td>
+                        <td><div id="42C"></div></td>
+                        <td><div id="43C"></div></td>
+                        <td><div id="44C"></div></td>
+                        <td><div id="45C"></div></td>
+                        <td><div id="46C"></div></td>
+                        <td><div id="47C"></div></td>
+                        <td><div id="48C"></div></td>
+                        <td><div id="49C"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">F</td>
+                        <td><div id="50C"></div></td>
+                        <td><div id="51C"></div></td>
+                        <td><div id="52C"></div></td>
+                        <td><div id="53C"></div></td>
+                        <td><div id="54C"></div></td>
+                        <td><div id="55C"></div></td>
+                        <td><div id="56C"></div></td>
+                        <td><div id="57C"></div></td>
+                        <td><div id="58C"></div></td>
+                        <td><div id="59C"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">G</td>
+                        <td><div id="60C"></div></td>
+                        <td><div id="61C"></div></td>
+                        <td><div id="62C"></div></td>
+                        <td><div id="63C"></div></td>
+                        <td><div id="64C"></div></td>
+                        <td><div id="65C"></div></td>
+                        <td><div id="66C"></div></td>
+                        <td><div id="67C"></div></td>
+                        <td><div id="68C"></div></td>
+                        <td><div id="69C"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">H</td>
+                        <td><div id="70C"></div></td>
+                        <td><div id="71C"></div></td>
+                        <td><div id="72C"></div></td>
+                        <td><div id="73C"></div></td>
+                        <td><div id="74C"></div></td>
+                        <td><div id="75C"></div></td>
+                        <td><div id="76C"></div></td>
+                        <td><div id="77C"></div></td>
+                        <td><div id="78C"></div></td>
+                        <td><div id="79C"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">I</td>
+                        <td><div id="80C"></div></td>
+                        <td><div id="81C"></div></td>
+                        <td><div id="82C"></div></td>
+                        <td><div id="83C"></div></td>
+                        <td><div id="84C"></div></td>
+                        <td><div id="85C"></div></td>
+                        <td><div id="86C"></div></td>
+                        <td><div id="87C"></div></td>
+                        <td><div id="88C"></div></td>
+                        <td><div id="89C"></div></td>
+                    </tr>
+                    <tr>
+                        <th class="lett">J</td>
+                        <td><div id="90C"></div></td>
+                        <td><div id="91C"></div></td>
+                        <td><div id="92C"></div></td>
+                        <td><div id="93C"></div></td>
+                        <td><div id="94C"></div></td>
+                        <td><div id="95C"></div></td>
+                        <td><div id="96C"></div></td>
+                        <td><div id="97C"></div></td>
+                        <td><div id="98C"></div></td>
+                        <td><div id="99C"></div></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <script src="game.js"></script>
+</body>
+</html>
