@@ -1,3 +1,9 @@
+* {
+    line-height: 24px;
+    margin: 0;
+    padding: 0;
+}
+
 #board {
     position: relative;
     width: 100%;
@@ -7,4 +13,20 @@
 #board-user, #board-computer {
     width: 40%;
     display:inline-block;
+}
+
+table,
+td,
+th {
+    border-collapse: collapse;
+}
+
+td:hover {
+    background: #6a53aa;
+}
+
+td div {
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
 }
