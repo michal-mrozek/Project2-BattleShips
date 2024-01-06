@@ -1,4 +1,4 @@
-const playerController = {
+const playerGameController = {
 
     init: function() {
         playerGameModel.boardSize = 10;
@@ -13,4 +13,4 @@ const playerController = {
 
 
 
-window.onload = playerController.init;
+window.onload = playerGameController.init();
