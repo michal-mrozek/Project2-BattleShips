@@ -3,7 +3,6 @@ computerModel = {
 
     boardSize : 10,
     numOfShips : 10,
-    shoots : [],
     allAround: new Set(),
     allLocations: new Set(),
     
@@ -13,7 +12,7 @@ computerModel = {
         { location: ["", "", ""], hits: [0, 0, 0], around: []},
         { location: ["", "", ""], hits: [0, 0, 0], around: []},
 
-        { location: ["", ""], hits: [0, 0], around: [] },
+        { location: ["", ""], hits: [0, 0], around: []},
         { location: ["", ""], hits: [0, 0], around: []},
         { location: ["", ""], hits: [0, 0], around: []},
 
@@ -151,14 +150,65 @@ computerModel = {
         }
     },
 }
+//computer controller
+computerControler = {
+    round: function(){
+            let shootLoc = computerControler.generateShot();
+            if (gameControler.checkIfHit("computer",shootLoc)) {
+                let shipIndex = gameControler.findShipIndex("computer",shootLoc);
+                setTimeout(computerControler.markAsHit(shootLoc, shipIndex),500);
+                let isSunk = gameControler.checkIfSunk("computer", shipIndex);
+                if(isSunk){
+                    if (gameControler.checkIfWin("computer")){
+                        console.log("Computer win")
+                    } else {
+                        setTimeout(computerControler.round, 500);
+                    }
+                }else{
+                    setTimeout(computerControler.round, 500);
+                }
+            } else {
+                setTimeout(computerControler.markAsMiss(shootLoc),500);
+            }
+    },
 
+    generateShot: function(){
+        let col = Math.floor(Math.random() * 10);
+        let row = Math.floor(Math.random() * 10);
+        let shootLoc = col+ "" +row
+        if (playerModel.shoots.has(shootLoc)){
+            computerControler.generateShot
+        }else{
+            playerModel.shoots.add(shootLoc)
+            console.log("Comp shoot at " + shootLoc)
+            return shootLoc;
+        }
+    },
+    markAsMiss: function(location){
+        const loc = document.getElementById(location);
+        console.log(location)
+        loc.classList.add("miss");
+        loc.classList.remove("red", "avail");
+    },
 
-//computer model
+    markAsHit: function(location, index){
+        const loc = document.getElementById(location);
+        console.log("location" + location)
+        loc.classList.add("hit");
+        loc.classList.remove("red", "avail")
+        let hitIndex = playerModel.ships[index].hits.indexOf(0);
+        if (hitIndex != -1) {
+            playerModel.ships[index].hits[hitIndex] = 1;
+        }
+    },
+    }
+
+//player model
 playerModel = {
 
     boardSize : 10,
     numOfShips : 10,
-    shoots : [],
+    shoots : new Set(),
     allAround: new Set(),
     allLocations: new Set(),
     
@@ -305,80 +355,128 @@ playerModel = {
         }
     },
 }
-
+//player controller
 playerControler = {
 
-    shoot: function(shootLoc) {
-        if (this.checkIfHit(shootLoc)) {
-            console.log("hitted");
-            this.markAsHit(shootLoc);
-            this.checkIfSunk(shootLoc);
-            this.checkIfWin();
+    round: function(shootLoc) {
+
+        if (gameControler.checkIfHit("user",shootLoc)) {
+            let shipIndex = gameControler.findShipIndex("user",shootLoc);
+            setTimeout(playerControler.markAsHit(shootLoc, shipIndex),1000);
+            let isSunk = gameControler.checkIfSunk("user", shipIndex);
+            if(isSunk){
+                if (gameControler.checkIfWin("user"))
+                console.log("you win")
+            }
         } else {
-            console.log("miss")
-            this.markAsMiss(shootLoc)
-            computerControler.shoot();
+            setTimeout(playerControler.markAsMiss(shootLoc),1000)
+            setTimeout(computerControler.round, 1000);
+            
         }
     },
 
-    checkIfHit: function(location) {
-        return computerModel.allLocations.has(location);
-    },
-
-    markAsHit: function(location){
-        const loc = document.getElementById(location+"C");
-        loc.classList.add("hit");
-        loc.classList.remove("red", "avail")
-    },
+   
     markAsMiss: function(location){
         const loc = document.getElementById(location+"C");
+        console.log("new loc " + location)
         loc.classList.add("miss");
         loc.classList.remove("red", "avail")
     },
 
-    checkIfSunk: function(location){
-
+    markAsHit: function(location, index){
+        console.log("new loc " + location)
+        const loc = document.getElementById(location+"C");
+        loc.classList.add("hit");
+        loc.classList.remove("red", "avail")
+        let hitIndex = computerModel.ships[index].hits.indexOf(0);
+        if (hitIndex != -1) {
+            computerModel.ships[index].hits[hitIndex] = 1;
+        }
     },
-
-    checkIfWin: function(){
-
-    },
-
-    waitForClick: function() {
-        const guessClick = document.getElementsByClassName("avail");
-    for (var i = 0; i < guessClick.length; i++) {
-        guessClick[i].onclick = function(eventObj) {
-            console.log("click")
-            var shot = eventObj.target;
-            
-            var location = shot.id.charAt([0])+ "" + shot.id.charAt([1]);
-            playerControler.shoot(location)
-            console.log(shot);
-            console.log(location);
-            
-        };
-    }
-    }
-
-
 
 }
 
-computerontroler = {
-    shoot: function(){
 
-    }
+//game controller
+gameControler = {
+
+    checkIfWin: function(player){
+        let model = (player == "computer") ? playerModel:computerModel;
+        if (model.numOfShips == 0){
+            
+            return true;
+        }
+        return false;
+    },
+
+    checkIfSunk: function(player, index){
+        let model = (player == "computer") ? playerModel:computerModel;
+        if (model.ships[index].hits.indexOf(0) == -1){
+
+            model.numOfShips-=1;
+            return true;
+        }
+    },
+
+    
+
+    checkIfHit: function(player, location) {
+        let model = (player == "computer") ? playerModel:computerModel;
+        return model.allLocations.has(location);
+    },
+
+    findShipIndex: function(player, location){
+        let model = (player == "computer") ? playerModel:computerModel;
+        
+        for (let i=0; i < model.ships.length;i++){
+            if (model.ships[i].location.indexOf(location) != -1){
+                return i;
+            }
+        }  
+    },
+    markAround: function(player, array){
+        let model = (player == "computer") ? playerModel:computerModel;
+        
+    },
+    generateMessage: function(text){
+
+    },
 }
 
-
+//init func
 function init() {
     computerModel.generateShipLocations();
     playerModel.generateShipLocations();
-    computerModel.displayShip(computerModel.allLocations);
+    //computerModel.displayShip(computerModel.allLocations);
     //computerModel.displayAround(computerModel.allAround);
     playerModel.displayShip(playerModel.allLocations);
     //playerModel.displayAround(playerModel.allAround);
-    playerControler.waitForClick();
+    
+
+    
+        const guessClick = document.getElementsByClassName("avail");
+    for (var i = 0; i < guessClick.length; i++) {
+        guessClick[i].onclick = function(eventObj) {
+            var shot = eventObj.target;
+            
+            var location = shot.id.charAt([0])+ "" + shot.id.charAt([1]);
+            playerControler.round(location)
+            console.log(shot);
+            console.log("player shoot at " + location);
+            
+        };
+    }
+    
+}
+function StartGame() {
+
+}
+
+function wonGame() {
+
+}
+
+function lostGame() {
 
 }
 
