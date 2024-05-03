@@ -140,15 +140,28 @@ computerModel = {
         }
     },
 
-    displayAround: function(target) {
-        for (const value of target) {
+    displayAround: function(ship) {
+        for (const value of ship) {
             let id = value+"C"
-            let td = document.getElementById(id);
+            let loc = document.getElementById(id);
           
-                td.classList.add("yellow")
+                loc.classList.add("miss");
+                loc.classList.remove("red", "avail");
             
         }
     },
+
+    markAround: function(shipIndex){
+        let ship = this.ships[shipIndex]
+        for (let loc of ship.around){
+            let id = loc+"C"
+            loc = document.getElementById(id);
+            loc.removeEventListener("click", listener);
+            loc.classList.add("miss");
+            loc.classList.remove("red", "avail");
+                
+        }
+}
 }
 //computer controller
 computerControler = {
@@ -160,6 +173,7 @@ computerControler = {
                 setTimeout(computerControler.markAsHit(shootLoc, shipIndex),500);
                 let isSunk = gameControler.checkIfSunk("computer", shipIndex);
                 if(isSunk){
+                    playerModel.markAround(shipIndex);
                     gameControler.generateMessage("Computer sunk your ship.");
                     if (gameControler.checkIfWin("computer")){
                         gameControler.generateMessage("You lost, wonna try again?");
@@ -358,12 +372,28 @@ playerModel = {
             
         }
     },
-}
+
+    markAround: function(shipIndex){
+        let ship = this.ships[shipIndex]
+        for (let id of ship.around){
+            this.shoots.add(id);
+            loc = document.getElementById(id);
+            loc.classList.add("miss");
+            loc.classList.remove("red", "avail");
+                
+        }
+                    
+            }
+    }
+
+
+
 //player controller
 playerControler = {
 
     round: function(shootLoc) {
         gameControler.generateMessage("");
+        document.getElementById(shootLoc+"C").removeEventListener("click", listener);
         if (gameControler.checkIfHit("user",shootLoc)) {
             
             let shipIndex = gameControler.findShipIndex("user",shootLoc);
@@ -371,6 +401,8 @@ playerControler = {
             let isSunk = gameControler.checkIfSunk("user", shipIndex);
             if(isSunk){
                 gameControler.generateMessage("You sink it!");
+                computerModel.markAround(shipIndex);
+                console.log("here")
                 if (gameControler.checkIfWin("user"))
                 gameControler.generateMessage("You won, grats!");
             }else{
@@ -462,21 +494,24 @@ function init() {
     //computerModel.displayAround(computerModel.allAround);
     playerModel.displayShip(playerModel.allLocations);
     //playerModel.displayAround(playerModel.allAround);
-    
+    const guessClick = document.getElementsByClassName("avail");
+    for (let guess of guessClick){
+        guess.addEventListener("click", listener);
+    }
 
     
-        const guessClick = document.getElementsByClassName("avail");
-    for (var i = 0; i < guessClick.length; i++) {
-        guessClick[i].onclick = function(eventObj) {
-            var shot = eventObj.target;
+    //     const guessClick = document.getElementsByClassName("avail");
+    // for (var i = 0; i < guessClick.length; i++) {
+    //     guessClick[i].onclick = function(eventObj) {
+    //         var shot = eventObj.target;
             
-            var location = shot.id.charAt([0])+ "" + shot.id.charAt([1]);
-            playerControler.round(location)
-            console.log(shot);
-            console.log("player shoot at " + location);
+    //         var location = shot.id.charAt([0])+ "" + shot.id.charAt([1]);
+    //         playerControler.round(location)
+    //         console.log(shot);
+    //         console.log("player shoot at " + location);
             
-        };
-    }
+    //     };
+    // }
     
 }
 function StartGame() {
@@ -490,7 +525,12 @@ function wonGame() {
 function lostGame() {
 
 }
-
+function listener(e){
+    let shot = e.target;
+    console.log(shot)
+    let location = shot.id.charAt([0])+ "" + shot.id.charAt([1]);
+    playerControler.round(location); 
+}
 
 
 window.onload = init;
