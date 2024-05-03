@@ -136,7 +136,7 @@ computerModel = {
             let id = value +"C"
             let td = document.getElementById(id);
           
-                td.style.background = "red"
+                td.classList.add("red")
             
         }
     },
@@ -146,7 +146,7 @@ computerModel = {
             let id = value+"C"
             let td = document.getElementById(id);
           
-                td.style.background = "yellow"
+                td.classList.add("yellow")
             
         }
     },
@@ -290,7 +290,7 @@ playerModel = {
             let id = value
             let td = document.getElementById(id);
           
-                td.style.background = "red"
+                td.classList.add("red")
             
         }
     },
@@ -300,37 +300,88 @@ playerModel = {
             let id = value
             let td = document.getElementById(id);
           
-                td.style.background = "yellow"
+                td.classList.add("yellow")
             
         }
     },
 }
 
+playerControler = {
+
+    shoot: function(shootLoc) {
+        if (this.checkIfHit(shootLoc)) {
+            console.log("hitted");
+            this.markAsHit(shootLoc);
+            this.checkIfSunk(shootLoc);
+            this.checkIfWin();
+        } else {
+            console.log("miss")
+            this.markAsMiss(shootLoc)
+            computerControler.shoot();
+        }
+    },
+
+    checkIfHit: function(location) {
+        return computerModel.allLocations.has(location);
+    },
+
+    markAsHit: function(location){
+        const loc = document.getElementById(location+"C");
+        loc.classList.add("hit");
+        loc.classList.remove("red", "avail")
+    },
+    markAsMiss: function(location){
+        const loc = document.getElementById(location+"C");
+        loc.classList.add("miss");
+        loc.classList.remove("red", "avail")
+    },
+
+    checkIfSunk: function(location){
+
+    },
+
+    checkIfWin: function(){
+
+    },
+
+    waitForClick: function() {
+        const guessClick = document.getElementsByClassName("avail");
+    for (var i = 0; i < guessClick.length; i++) {
+        guessClick[i].onclick = function(eventObj) {
+            console.log("click")
+            var shot = eventObj.target;
+            
+            var location = shot.id.charAt([0])+ "" + shot.id.charAt([1]);
+            playerControler.shoot(location)
+            console.log(shot);
+            console.log(location);
+            
+        };
+    }
+    }
 
 
+
+}
+
+computerontroler = {
+    shoot: function(){
+
+    }
+}
 
 
 function init() {
     computerModel.generateShipLocations();
     playerModel.generateShipLocations();
     computerModel.displayShip(computerModel.allLocations);
-    computerModel.displayAround(computerModel.allAround);
+    //computerModel.displayAround(computerModel.allAround);
     playerModel.displayShip(playerModel.allLocations);
-    playerModel.displayAround(playerModel.allAround);
+    //playerModel.displayAround(playerModel.allAround);
+    playerControler.waitForClick();
 
-
-    var guessClick = document.getElementsByTagName("td");
-    for (var i = 0; i < guessClick.length; i++) {
-        guessClick[i].onclick = answer;
-    }
 }
 
-function answer(eventObj) {
-    var shot = eventObj.target;
-    var location = shot.id;
-    console.log(shot);
-    console.log(location);
-    document.getElementById(location).style.backgroundColor = "red"
-}
+
 
 window.onload = init;
