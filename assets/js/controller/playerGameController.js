@@ -13,4 +13,4 @@ const playerGameController = {
 
 
 
-window.onload = playerGameController.init();
+
