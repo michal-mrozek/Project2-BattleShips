@@ -2,11 +2,18 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background-image: url("/assets/media/bg1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; /* Resize the background image to cover the entire container */
+    
+
   }
 
 main {
     flex: 1 0 auto;
   }
+
 
 #message {
     height: 30px;
@@ -16,10 +23,14 @@ main {
     background: #6a53aa;
 }
 
+#board {
+    margin-bottom: 40px;
+}
+
 #board-user .s1,
 #board-computer .s1 {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border: 1px solid black;
 }
 
@@ -35,3 +46,21 @@ main {
     background: green ;
 }
 
+.fa-solid {
+    position: relative;
+    top: 10px;
+    left: -7px;
+}
+
+.fa-lg {
+    font-size: 1.4rem;
+}
+
+img {
+    height: 25px;
+    width: 25px;
+    position: relative;
+    top: 5px;
+    left: -8px;
+
+}

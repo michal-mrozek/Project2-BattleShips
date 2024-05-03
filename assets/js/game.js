@@ -130,12 +130,13 @@ computerModel = {
     },
 
     displayShip: function(target) {
+        let string = '<i class="fa-solid fa-ship fa-lg "></i>';
         for (const value of target) {
         
             let id = value +"C"
             let td = document.getElementById(id);
           
-                td.classList.add("red")
+                td.innerHTML = string;
             
         }
     },
@@ -152,13 +153,13 @@ computerModel = {
     },
 
     markAround: function(shipIndex){
+        let string = '<i class="fa-solid fa-burst fa-lg"></i>'
         let ship = this.ships[shipIndex]
         for (let loc of ship.around){
             let id = loc+"C"
             loc = document.getElementById(id);
             loc.removeEventListener("click", listener);
-            loc.classList.add("miss");
-            loc.classList.remove("red", "avail");
+            loc.innerHTML = string;
                 
         }
 }
@@ -204,16 +205,15 @@ computerControler = {
     },
 
     markAsMiss: function(location){
+        let string = '<i class="fa-solid fa-burst fa-lg"></i>'
         const loc = document.getElementById(location);
-        console.log(location)
-        loc.classList.add("miss");
-        loc.classList.remove("red", "avail");
+        loc.innerHTML = string;
     },
 
     markAsHit: function(location, index){
+        let string = '<img src="assets/media/fire.png" alt="fire">'
         const loc = document.getElementById(location);
-        loc.classList.add("hit");
-        loc.classList.remove("red", "avail")
+        loc.innerHTML = string;
         let hitIndex = playerModel.ships[index].hits.indexOf(0);
         if (hitIndex != -1) {
             playerModel.ships[index].hits[hitIndex] = 1;
@@ -353,12 +353,13 @@ playerModel = {
     },
 
     displayShip: function(target) {
+        let string = '<i class="fa-solid fa-ship fa-lg "></i>';
         for (const value of target) {
         
             let id = value
             let td = document.getElementById(id);
           
-                td.classList.add("red")
+                td.innerHTML = string;
             
         }
     },
@@ -374,12 +375,12 @@ playerModel = {
     },
 
     markAround: function(shipIndex){
+        let string = '<i class="fa-solid fa-burst fa-lg"></i>'
         let ship = this.ships[shipIndex]
         for (let id of ship.around){
             this.shoots.add(id);
             loc = document.getElementById(id);
-            loc.classList.add("miss");
-            loc.classList.remove("red", "avail");
+            loc.innerHTML = string;
                 
         }
                     
@@ -418,18 +419,16 @@ playerControler = {
 
    
     markAsMiss: function(location){
-        
+        let string = '<i class="fa-solid fa-burst fa-lg"></i>'
         const loc = document.getElementById(location+"C");
-        console.log("new loc " + location)
-        loc.classList.add("miss");
-        loc.classList.remove("red", "avail")
+        loc.innerHTML = string;
+        
     },
 
     markAsHit: function(location, index){
-        console.log("new loc " + location)
+        let string = '<img src="assets/media/fire.png" alt="fire">'
         const loc = document.getElementById(location+"C");
-        loc.classList.add("hit");
-        loc.classList.remove("red", "avail")
+        loc.innerHTML = string;
         let hitIndex = computerModel.ships[index].hits.indexOf(0);
         if (hitIndex != -1) {
             computerModel.ships[index].hits[hitIndex] = 1;
@@ -491,6 +490,7 @@ function init() {
     computerModel.generateShipLocations();
     playerModel.generateShipLocations();
     //computerModel.displayShip(computerModel.allLocations);
+
     //computerModel.displayAround(computerModel.allAround);
     playerModel.displayShip(playerModel.allLocations);
     //playerModel.displayAround(playerModel.allAround);
