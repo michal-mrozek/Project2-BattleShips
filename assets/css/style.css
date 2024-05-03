@@ -8,6 +8,9 @@ main {
     flex: 1 0 auto;
   }
 
+#message {
+    height: 30px;
+}
 
 .avail:hover {
     background: #6a53aa;

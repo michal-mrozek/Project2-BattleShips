@@ -153,21 +153,25 @@ computerModel = {
 //computer controller
 computerControler = {
     round: function(){
+            gameControler.generateMessage("");
             let shootLoc = computerControler.generateShot();
             if (gameControler.checkIfHit("computer",shootLoc)) {
                 let shipIndex = gameControler.findShipIndex("computer",shootLoc);
                 setTimeout(computerControler.markAsHit(shootLoc, shipIndex),500);
                 let isSunk = gameControler.checkIfSunk("computer", shipIndex);
                 if(isSunk){
+                    gameControler.generateMessage("Computer sunk your ship.");
                     if (gameControler.checkIfWin("computer")){
-                        console.log("Computer win")
+                        gameControler.generateMessage("You lost, wonna try again?");
                     } else {
-                        setTimeout(computerControler.round, 500);
+                        gameControler.generateMessage("Computer hit your ship");
+                        setTimeout(computerControler.round, 1000);
                     }
                 }else{
-                    setTimeout(computerControler.round, 500);
+                    setTimeout(computerControler.round, 1000);
                 }
             } else {
+                gameControler.generateMessage("Computer missed.");
                 setTimeout(computerControler.markAsMiss(shootLoc),500);
             }
     },
@@ -184,6 +188,7 @@ computerControler = {
             return shootLoc;
         }
     },
+
     markAsMiss: function(location){
         const loc = document.getElementById(location);
         console.log(location)
@@ -193,7 +198,6 @@ computerControler = {
 
     markAsHit: function(location, index){
         const loc = document.getElementById(location);
-        console.log("location" + location)
         loc.classList.add("hit");
         loc.classList.remove("red", "avail")
         let hitIndex = playerModel.ships[index].hits.indexOf(0);
@@ -359,16 +363,21 @@ playerModel = {
 playerControler = {
 
     round: function(shootLoc) {
-
+        gameControler.generateMessage("");
         if (gameControler.checkIfHit("user",shootLoc)) {
+            
             let shipIndex = gameControler.findShipIndex("user",shootLoc);
             setTimeout(playerControler.markAsHit(shootLoc, shipIndex),1000);
             let isSunk = gameControler.checkIfSunk("user", shipIndex);
             if(isSunk){
+                gameControler.generateMessage("You sink it!");
                 if (gameControler.checkIfWin("user"))
-                console.log("you win")
+                gameControler.generateMessage("You won, grats!");
+            }else{
+                gameControler.generateMessage("You hit the ship");
             }
         } else {
+            gameControler.generateMessage("You missed.");
             setTimeout(playerControler.markAsMiss(shootLoc),1000)
             setTimeout(computerControler.round, 1000);
             
@@ -377,6 +386,7 @@ playerControler = {
 
    
     markAsMiss: function(location){
+        
         const loc = document.getElementById(location+"C");
         console.log("new loc " + location)
         loc.classList.add("miss");
@@ -439,12 +449,13 @@ gameControler = {
         
     },
     generateMessage: function(text){
-
+        document.getElementById("message").innerText = text;
     },
 }
 
 //init func
 function init() {
+    gameControler.generateMessage("");
     computerModel.generateShipLocations();
     playerModel.generateShipLocations();
     //computerModel.displayShip(computerModel.allLocations);
