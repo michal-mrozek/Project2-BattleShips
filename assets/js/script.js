@@ -339,10 +339,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let playerController = {
 
         round: function (shootLoc) {
-            
+
             gameController.generateMessage("");
 
-            
+
             let div = document.getElementById(shootLoc + "C")
             div.removeEventListener("click", listener);
 
@@ -406,7 +406,9 @@ document.addEventListener("DOMContentLoaded", function () {
         round: function (shootLoc) {
 
             gameController.generateMessage("");
-
+            playerModel.shoots.add(shootLoc)
+            console.log(computerModel.availShoots.length)
+            console.log(playerModel.shoots)
             let isHit = gameController.checkIfHit("computer", shootLoc)
 
             if (isHit) {
@@ -491,6 +493,10 @@ document.addEventListener("DOMContentLoaded", function () {
             let targetIndex = Math.floor(Math.random() * targets.length);
             let lastShot = targets[targetIndex]
             computerModel.shootCloseAssistant["lastShot"] = lastShot;
+
+            let indexToRemove = computerModel.availShoots.indexOf(lastShot);
+            if (indexToRemove != -1)
+                computerModel.availShoots.splice(indexToRemove, 1);
 
             computerController.round(lastShot);
         },

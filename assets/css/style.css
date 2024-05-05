@@ -12,7 +12,6 @@ main {
     flex: 1 0 auto;
 }
 
-
 #message {
     height: 30px;
 }
@@ -25,11 +24,23 @@ main {
     margin-bottom: 40px;
 }
 
-#board-user .s1,
-#board-computer .s1 {
+#board-user,
+#board-computer {
+    margin-bottom: 10px;
+}
+
+#board-user .s1 {
     width: 35px;
     height: 35px;
     border: 1px solid black;
+
+}
+
+#board-computer .s1 {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+
 }
 
 .row {
@@ -50,6 +61,16 @@ main {
     left: -7px;
 }
 
+.avail .fa-solid {
+    position: relative;
+    top: 15px;
+    left: -4px;
+}
+
+.avail .fa-lg {
+    font-size: 2rem;
+}
+
 .fa-lg {
     font-size: 1.4rem;
 }
@@ -60,7 +81,14 @@ img {
     position: relative;
     top: 5px;
     left: -8px;
+}
 
+.avail img {
+    height: 40px;
+    width: 40px;
+    position: relative;
+    top: 5px;
+    left: -8px;
 }
 
 button {
@@ -71,7 +99,114 @@ button {
     margin-left: 15px;
 }
 
-.container {
-    text-align: center;
+@media screen and (max-width: 1250px) {
+    #board-computer .s1 {
+        width: 35px;
+        height: 35px;
+        border: 1px solid black;
+    }
 
+    .avail .fa-solid {
+        position: relative;
+        top: 10px;
+        left: -7px;
+    }
+
+    .avail .fa-lg {
+        font-size: 1.4rem;
+    }
+
+    .avail img {
+        height: 25px;
+        width: 25px;
+        position: relative;
+        top: 5px;
+        left: -8px;
+    }
+}
+
+
+@media only screen and (max-width: 993px) {
+
+    #board-computer .s1,
+    #board-user .s1 {
+        width: 30px;
+        height: 30px;
+        border: 1px solid black;
+    }
+
+
+    .avail .fa-solid,
+    .fa-solid {
+        position: relative;
+        top: 5px;
+        left: -7px;
+    }
+
+    .avail .fa-lg,
+    .fa-lg {
+        font-size: 1.3rem;
+    }
+
+    .avail img,
+    img {
+        height: 20px;
+        width: 20px;
+        position: relative;
+        top: 5px;
+        left: -8px;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    h4 {
+        font-size: 1.64rem;
+    }
+
+    #board-computer .s1,
+    #board-user .s1 {
+        width: 25px;
+        height: 25px;
+        border: 1px solid black;
+    }
+
+
+    .avail .fa-solid,
+    .fa-solid {
+        position: relative;
+        top: 3px;
+        left: -8px;
+    }
+
+    .avail .fa-lg,
+    .fa-lg {
+        font-size: 1.1rem;
+    }
+
+    .avail img,
+    img {
+        height: 18px;
+        width: 18px;
+        position: relative;
+        top: 3px;
+        left: -8px;
+    }
+}
+
+
+@media only screen and (min-width: 601px) {
+    .container {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 400px) {}
+
+
+
+.container {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 90%;
+    text-align: center;
 }
