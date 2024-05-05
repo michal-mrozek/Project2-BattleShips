@@ -5,12 +5,12 @@ body {
     background-image: url("/assets/media/bg1.jpg");
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover; /* Resize the background image to cover the entire container */
-  }
+    background-size: cover;
+}
 
 main {
     flex: 1 0 auto;
-  }
+}
 
 
 #message {
@@ -37,11 +37,11 @@ main {
 }
 
 .hit {
-    background: black ;
+    background: black;
 }
 
 .miss {
-    background: green ;
+    background: green;
 }
 
 .fa-solid {
@@ -62,6 +62,7 @@ img {
     left: -8px;
 
 }
+
 button {
     margin-right: 15px;
 }
