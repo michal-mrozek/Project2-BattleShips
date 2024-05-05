@@ -2,7 +2,7 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-image: url("/assets/media/bg1.jpg");
+    background-image: url("../media/bg1.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
