@@ -341,12 +341,11 @@ document.addEventListener("DOMContentLoaded", function () {
         round: function (shootLoc) {
 
             gameController.generateMessage("");
-
-
             let div = document.getElementById(shootLoc + "C")
             div.removeEventListener("click", listener);
 
             if (gameController.checkIfHit("user", shootLoc)) {
+                console.log("Player hit: " + true)
 
                 let shipIndex = gameController.findShipIndex("user", shootLoc);
                 playerController.markAsHit(shootLoc, shipIndex);
@@ -365,6 +364,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     gameController.generateMessage("You hit the ship");
                 }
             } else {
+                console.log("Player hit: " + false)
                 playerController.markAsMiss(shootLoc);
                 setTimeout(computerController.generateTarget, 1000);
             }
@@ -407,8 +407,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             gameController.generateMessage("");
             playerModel.shoots.add(shootLoc)
-            console.log(computerModel.availShoots.length)
-            console.log(playerModel.shoots)
             let isHit = gameController.checkIfHit("computer", shootLoc)
 
             if (isHit) {
